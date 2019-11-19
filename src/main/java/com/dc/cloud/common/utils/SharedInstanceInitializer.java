@@ -7,6 +7,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * 初始化一些不在spring容器中的自定义的bean
+ */
+
 // SmartInitializingSingleton
 @Component
 public class SharedInstanceInitializer implements SmartApplicationListener {

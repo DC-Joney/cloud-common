@@ -18,13 +18,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * 对 redirect 以及 forward的 封装
+ */
 public class UniversalViewResolver implements InitializingBean {
 
     @Autowired
     private InternalResourceViewResolver viewResolver;
 
+
     private CacheLoader<CacheKey, String> cacheLoader = new UrlCacheLoader();
 
+    //用guava的LRU做缓存
     private LoadingCache<CacheKey, String> urlCache;
 
     @Override
@@ -35,6 +40,19 @@ public class UniversalViewResolver implements InitializingBean {
                 .build(cacheLoader);
     }
 
+
+
+
+    /**
+     * Forward 跳转
+     * 会自动根据Controller上的 @RequestMapping url 进行拼接跳转
+     *
+     *
+     * @param url 需要跳转的url
+     * @param controllerClass  需要跳转url所依赖的Controller Class
+     * @return
+     * @throws Exception
+     */
     public static View forwardView(String url, Class<?> controllerClass) throws Exception {
         CacheKey cacheKey = new CacheKey(url, controllerClass);
         String controllerPath = shardInstance().urlCache.get(cacheKey);
@@ -51,6 +69,16 @@ public class UniversalViewResolver implements InitializingBean {
         return shardInstance().viewResolver.resolveViewName(UrlBasedViewResolver.REDIRECT_URL_PREFIX + url, Locale.CHINA);
     }
 
+    /**
+     * Redirect 跳转
+     * 会自动根据Controller上的 @RequestMapping url 进行拼接
+     *
+     *
+     * @param url 需要跳转的url
+     * @param controllerClass  需要跳转url所依赖的Controller Class
+     * @return
+     * @throws Exception
+     */
     public static View redirectView(String url, Class<?> controllerClass) throws Exception {
         CacheKey cacheKey = new CacheKey(url, controllerClass);
         String controllerPath = shardInstance().urlCache.get(cacheKey);
@@ -67,7 +95,9 @@ public class UniversalViewResolver implements InitializingBean {
         private static UniversalViewResolver INSTANCE = new UniversalViewResolver();
     }
 
-
+    /**
+     *
+     */
     @AllArgsConstructor
     private static class CacheKey {
 
@@ -79,6 +109,10 @@ public class UniversalViewResolver implements InitializingBean {
     }
 
 
+    /**
+     * 根据 Controller Class上的RequestMapping 做路径拼接
+     *
+     */
     private static class UrlCacheLoader extends CacheLoader<CacheKey, String> {
 
         @Override

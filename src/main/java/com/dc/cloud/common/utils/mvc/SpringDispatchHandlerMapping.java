@@ -15,6 +15,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+
+/**
+ * 扫描所有的Controller层,然后合并Controller曾和 Service层的Path
+ */
 @Component
 public class SpringDispatchHandlerMapping extends RequestMappingHandlerMapping {
 

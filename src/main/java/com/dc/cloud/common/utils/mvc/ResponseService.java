@@ -11,6 +11,10 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+
+/**
+ * 对 service层的返回json类型的映射
+ */
 @Service
 @ResponseBody
 public @interface ResponseService {

@@ -10,6 +10,10 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+
+/**
+ * 指定在Controller层做映射，然后将Controller层和 Service 层合并 path
+ */
 @RequestMapping
 public @interface ServiceMapping {
 
@@ -54,6 +58,7 @@ public @interface ServiceMapping {
     String[] produces() default {};
 
 
+    //需要处理的Service层次名称
     Class<?> mappingClass();
 
 }

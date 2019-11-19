@@ -4,6 +4,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 
+/**
+ * 测试 Service层 的异常处理
+ */
 @RestControllerAdvice
 public class ExceptionControllerAdvice{
 
