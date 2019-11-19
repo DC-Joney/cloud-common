@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 /**
  * 扫描所有的Controller层,然后合并Controller曾和 Service层的Path
+ * 见案例 com.dc.cloud.common.web.ServiceController
+ *          com.dc.cloud.common.service.DemoService
  */
 @Component
 public class SpringDispatchHandlerMapping extends RequestMappingHandlerMapping {

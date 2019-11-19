@@ -26,7 +26,6 @@ public class UniversalViewResolver implements InitializingBean {
     @Autowired
     private InternalResourceViewResolver viewResolver;
 
-
     private CacheLoader<CacheKey, String> cacheLoader = new UrlCacheLoader();
 
     //用guava的LRU做缓存
@@ -66,7 +65,7 @@ public class UniversalViewResolver implements InitializingBean {
     }
 
     public static View redirectView(String url) throws Exception {
-        return shardInstance().viewResolver.resolveViewName(UrlBasedViewResolver.REDIRECT_URL_PREFIX + url, Locale.CHINA);
+        return redirectView(url,null);
     }
 
     /**
