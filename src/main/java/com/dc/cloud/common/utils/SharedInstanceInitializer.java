@@ -1,5 +1,6 @@
 package com.dc.cloud.common.utils;
 
+import com.dc.cloud.common.excel.ExcelUtils;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
@@ -30,9 +31,25 @@ public class SharedInstanceInitializer implements SmartApplicationListener {
         ApplicationContext applicationContext = (ApplicationContext) event.getSource();
 
         //configureBean
+//        applicationContext.getAutowireCapableBeanFactory()
+//                .autowireBeanProperties(UniversalViewResolver.shardInstance(), AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE,false);
+//        applicationContext.getAutowireCapableBeanFactory()
+//                .initializeBean(UniversalViewResolver.shardInstance(),UniversalViewResolver.class.getSimpleName());
+
+        //ExcelUtils
         applicationContext.getAutowireCapableBeanFactory()
-                .autowireBeanProperties(UniversalViewResolver.shardInstance(), AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE,false);
+                .initializeBean(ExcelUtils.getSharedInstance(), ExcelUtils.class.getSimpleName());
+
+        //LocalContext
         applicationContext.getAutowireCapableBeanFactory()
-                .initializeBean(UniversalViewResolver.shardInstance(),UniversalViewResolver.class.getSimpleName());
+                .autowireBeanProperties(LocalContext.shardInstance(), AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE,false);
+        applicationContext.getAutowireCapableBeanFactory()
+                .initializeBean(LocalContext.shardInstance(),LocalContext.class.getSimpleName());
     }
+
+    @Override
+    public int getOrder() {
+        return Integer.MIN_VALUE;
+    }
+
 }

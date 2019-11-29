@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "demo.server",
+      "type": "com.dc.cloud.common.test.DemoServer",
+      "sourceType": "com.dc.cloud.common.test.DemoServer"
+    }
+  ],
+  "properties": [
+    {
+      "name": "demo.server.favorites",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.dc.cloud.common.test.DemoServer"
+    },
+    {
+      "name": "demo.server.name",
+      "type": "java.lang.String",
+      "sourceType": "com.dc.cloud.common.test.DemoServer"
+    }
+  ],
+  "hints": []
+}
